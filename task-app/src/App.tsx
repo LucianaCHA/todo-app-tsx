@@ -1,4 +1,11 @@
 import React, { useState, useRef } from 'react';
+import {
+  Routes,
+  Route,
+} from "react-router-dom";
+import Heading from './components/Heading';
+import TaskForm from './components/TaskForm';
+import TaskList from './components/TaskList'
 type FormeELement = React.FormEvent<HTMLFormElement>;
 
 //interface declaro una especie de clase
@@ -6,6 +13,19 @@ type FormeELement = React.FormEvent<HTMLFormElement>;
 interface Itask {
   name: string;
   done: boolean;
+}
+
+declare function Router(
+  props: RouterProps
+): React.ReactElement | null;
+
+interface RouterProps {
+  basename?: string;
+  children?: React.ReactNode;
+  location: Partial<Location> | string;
+  // navigationType?: NavigationType;
+  navigator: Navigator;
+  static?: boolean;
 }
 function App(): JSX.Element { //aca le digo explicitamente  que voy a retornar un elemewnto jsx XD
 
@@ -42,6 +62,14 @@ function App(): JSX.Element { //aca le digo explicitamente  que voy a retornar u
 
   return (
     <>
+    <Heading/>
+    <Routes>
+  
+    </Routes>
+      
+     
+   
+    
       <form onSubmit={handleSubmit}>
         <input type="text" onChange={(e) => setNewTask(e.target.value)} value={newTask} ref={taskInput} autoFocus />
         <button>Add!</button>
