@@ -1,4 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+
+export const getTodoAsync = createAsyncThunk('todos/getTodoAsync', async () => {
+    const response = await fetch('http://localhost:7000/todos');
+    if(response.ok) {
+        const todo = await response.json();
+        return {todo};
+    }
+    throw new Error('Error ocurred fetching todos');
+})
 
 const todoSlice = createSlice({
   name: "todo",
@@ -32,7 +41,15 @@ const todoSlice = createSlice({
     //   state[index].completed = !state[index].completed;
     // ,
   },
-}
+},
+//aqui se ponen los thunks , son los actions asincronos, el slice refiere al fullfiled (rta ok)
+//y el rejected son los que se ejecutan cuando falla
+extraReducers: {
+    [getTodoAsync.fulfilled]: (state, action) => {
+        state = action.payload.todo;
+        return state;
+    }
+},
 });
 
 export const { addTodo, deleteTodo, toggleTodo } = todoSlice.actions;
