@@ -22,7 +22,7 @@ const defaultProps = {};
  * 
  */
 const Heading = () : JSX.Element => {
-  return (<div>Heading!</div>);
+  return (<div>Super truchi todo APP!</div>);
 }
 
 Heading.propTypes = propTypes;

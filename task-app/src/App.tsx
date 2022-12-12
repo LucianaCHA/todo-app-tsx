@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import {
   Routes,
-  Route,
 } from "react-router-dom";
 import Heading from './components/Heading';
 import TaskForm from './components/TaskForm';
@@ -58,6 +57,14 @@ function App(): JSX.Element { //aca le digo explicitamente  que voy a retornar u
     setTasks(newTasks);
     console.log(tasks)
   }
+  // crear un boton para generar un recordatorio de calendario
+   const handleCalendar = (i: number): void => {
+   console.log(tasks);
+    let newTasks: Itask[] = [...tasks];
+    newTasks.splice(i, 1);
+    setTasks(newTasks);
+    console.log(tasks)
+  }
 
 
   return (
@@ -72,7 +79,8 @@ function App(): JSX.Element { //aca le digo explicitamente  que voy a retornar u
     
       <form onSubmit={handleSubmit}>
         <input type="text" onChange={(e) => setNewTask(e.target.value)} value={newTask} ref={taskInput} autoFocus />
-        <button>Add!</button>
+        {/* desabilitar boton si el value esta vacio */}
+        <button disabled={newTask.length < 1}>Add!</button>
       </form>
 
       {
@@ -81,6 +89,11 @@ function App(): JSX.Element { //aca le digo explicitamente  que voy a retornar u
             <h2 > {task.name} </h2>
             <button onClick={() => handleDone(i)} style={{ backgroundColor: task.done ? 'green' : 'red' }}> {task.done ? 'Done!' : 'ToDO!'} </button>
             <button onClick={() => handleDelete(i)} >Delete!</button>
+            {/* agregar un boton para generar un recordartorio de calendario */}
+            <button onClick={() => handleCalendar(i)} 
+            style={{ backgroundColor: 'blue' }}>Calendar!</button>
+            
+
           </li>
         ))
       }
