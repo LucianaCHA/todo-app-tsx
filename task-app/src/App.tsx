@@ -5,6 +5,7 @@ import {
 import Heading from './components/Heading';
 import TaskForm from './components/TaskForm';
 import TaskList from './components/TaskList'
+import {createEvent, deleteEvent, getEvents}  from './controller';
 type FormeELement = React.FormEvent<HTMLFormElement>;
 
 //interface declaro una especie de clase
@@ -31,6 +32,8 @@ function App(): JSX.Element { //aca le digo explicitamente  que voy a retornar u
   const [newTask, setNewTask] = useState<string>('');
   const [tasks, setTasks] = useState<Itask[]>([]);
   const taskInput = useRef<HTMLInputElement>(null);
+  const [events, setEvents] = useState<any>([]);
+  const [id, setId] = useState<string>('');
 
   const handleSubmit = (e: FormeELement) => {
     e.preventDefault();
@@ -58,14 +61,17 @@ function App(): JSX.Element { //aca le digo explicitamente  que voy a retornar u
     console.log(tasks)
   }
   // crear un boton para generar un recordatorio de calendario
-   const handleCalendar = (i: number): void => {
-   console.log(tasks);
-    let newTasks: Itask[] = [...tasks];
-    newTasks.splice(i, 1);
-    setTasks(newTasks);
-    console.log(tasks)
+   const handleCalendar = (i: any): void => {
+    createEvent()
+    console.log(events);
+    
   }
 
+  const handleDeleteCalendar = (id: string): void => {
+    console.log(id);
+    
+    deleteEvent(id)
+  }
 
   return (
     <>
@@ -92,11 +98,19 @@ function App(): JSX.Element { //aca le digo explicitamente  que voy a retornar u
             {/* agregar un boton para generar un recordartorio de calendario */}
             <button onClick={() => handleCalendar(i)} 
             style={{ backgroundColor: 'blue' }}>Calendar!</button>
-            
-
           </li>
         ))
       }
+
+      {/* necesito un input donde ingresar id de un evento y un boton para despachar delete event
+       */}
+      <div className='events'>
+        <input type="text" onChange={(e) => setId(e.target.value)} value={id} />
+        <button onClick={() => handleDeleteCalendar(id)} >Delete!</button>
+      </div>
+       
+
+
 
 
     </>

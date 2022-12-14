@@ -23,9 +23,20 @@ form {
 input {
   margin: 10px 0;
   padding: 10px;
-  width: 100%;
   border: 1px solid #ccc;
   border-radius: 5px;
+  width: 30vw;
+}
+.events {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;  
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 40vw;
 }
 
 li {
