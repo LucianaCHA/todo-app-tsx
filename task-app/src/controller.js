@@ -8,9 +8,9 @@ const url = 'https://www.googleapis.com/calendar/v3/calendars/primary/events'
 
 const options = {
 	headers: {
-    Authorization:'Bearer ya29.a0AeTM1icIUV2jgYyH-9S1CCc--N79JTPZar26t0nSp3ppm02D3tzVVqoS03OXbbs5xRczdQokebu5H3jXMxGwgzThjWX2WY1urTMfCYK2nEtIRo1chhRLUvS5REM3WWNm1qn1cQGJTdlgY3L5pIzVeuEDUCxhaCgYKAccSARMSFQHWtWOmCsdIUIuvxs4yVUWH1b0nQA0163',
-Accept: 'application/json'
-  },
+    Authorization:process.env.REACT_APP_TOKEN,
+    Accept: 'application/json'
+    },
 };
 
 const getEvents = () => {
